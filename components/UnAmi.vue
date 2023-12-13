@@ -1,7 +1,7 @@
 <template>
     <div class="container my-1">
         <ul class="list-group">
-            <h2 class="list-group-item">{{leNom}}{{premiumData == true ? '(Ami Premium)' : ' (Ami Nul)'}}</h2> 
+            <h2 class="list-group-item">{{leNom}}{{premiumData == true ? ' (Ami Premium)' : ' (Ami Nul)'}}</h2> 
             <!--<h3>{{premiumData == '1' ? ' - Ami Premium' : ' - Ami Nul'}}</h3>-->
             <button @click="afficherPremium" class="btn btn-danger">Premium ?</button>
             <button @click="afficherDetails" class="btn btn-primary">Voir Détails</button>           
@@ -78,7 +78,8 @@ export default {
             this.detailsVisibles = !this.detailsVisibles;
         } ,
         afficherPremium() {
-            this.premiumData = !this.premiumData ;
+            this.$emit(`mon-event-premium`) ;
+            //this.premiumData = !this.premiumData ;
             /*if (this.premiumData === '1') {
                 this.premiumData = '0' ;
             } else {
