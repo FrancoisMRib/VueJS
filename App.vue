@@ -8,6 +8,7 @@
       :lePhone="unAmi.phone" 
       :leMail="unAmi.email" 
       :premium="unAmi.premium"
+      :id="unAmi.id"
       @mon-event-premium = "afficherStatusPremium"
       ></un-ami>
       <!--<un-ami leNom="Steven Seagal" lePhone="1234567" leMail="steven@seagal.com" premium="1"></un-ami>
@@ -47,9 +48,11 @@ export default{
     }
   },
   methods: {
-    afficherStatusPremium() {
-      console.log("La méthode marche !")
-    }
+    afficherStatusPremium(leIdDansUnAmi) {
+      const unAmiIdentified= this.lesAmis.find(unAmi => unAmi.id === leIdDansUnAmi) ;
+      console.log(unAmiIdentified) ;
+      unAmiIdentified.premium = !unAmiIdentified.premium ;
+    },
   },
 }
 </script>
