@@ -44,10 +44,20 @@ export default {
             required: false
         }
     },
+    emits : {
+        'mon-event-premium' : function(id) {
+                if (id) {
+                    return true ;
+                } else {
+                    console.warn('Fais Gaffe !');
+                    return false ;
+                }
+            },
+    },
     data(){
         return{
             
-            premiumData: this.premium,
+            //premiumData: this.premium,
             detailsVisibles:false,
 /*
             prop1:{
