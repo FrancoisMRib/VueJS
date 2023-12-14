@@ -23,6 +23,20 @@ export default{
   data(){
     return {
       lesAmis: [
+      {
+            id: 'hadock',
+            name: 'Captain Hadock',
+            phone: '09876 543 221',
+            email: 'cap@hadock.com',
+            premium:false
+        },
+        {
+            id:'kimonoSurUnFrigo',
+            name:"Steven Seagal",
+            phone:'+338765477',
+            email:'steven@seagal.com',
+            premium:false
+        },
         {
             id: 'lasticot',
             name: 'COCO L ASTICOT',
@@ -53,6 +67,17 @@ export default{
       console.log(unAmiIdentified) ;
       unAmiIdentified.premium = !unAmiIdentified.premium ;
     },
+    ajouterAmi(eventName,eventPhone,eventMail){
+    const newAmiContact = {
+      id:new Date().toISOString(),
+      name:eventName,
+      phone:eventPhone,
+      email:eventMail,
+      premium:false,
+    };
+    console.log(this.lesAmis);
+    this.lesAmis.push(newAmiContact);
+  },
   },
 }
 </script>
