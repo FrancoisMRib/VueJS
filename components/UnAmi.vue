@@ -1,104 +1,64 @@
 <template>
     <div class="container my-1">
         <ul class="list-group">
-            <h2 class="list-group-item">{{leNom}}{{premium == true ? ' (Ami Premium)' : ' (Ami Nul)'}}</h2> 
-            <!--<h3>{{premiumData == '1' ? ' - Ami Premium' : ' - Ami Nul'}}</h3>-->
-            <button @click="afficherPremium" class="btn btn-danger">Premium ?</button>
-            <button @click="afficherDetails" class="btn btn-primary">Voir Détails</button>           
+            <h2 class="list-group-item">{{leNom}} {{premium ? '(Ami premium)':'(Ami nul)'}}</h2> 
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button @click="afficherDetails" type="button" class="m-1 btn btn-outline-secondary">👁 {{detailsVisibles? 'Masquer': 'Afficher'}} Détails</button>
+                <button @click="afficherPremium"  type="button" class=" m-1 btn btn-outline-success">⭐️ Premium</button>
+                <button @click="$emit('delete',id)" type="button" class=" m-1 btn btn-outline-danger">🗑 Suppr.</button>
+            </div>
             <ul v-if="detailsVisibles" class="list-group">
                 <li class="list-group-item">{{lePhone}}</li>
                 <li class="list-group-item">{{leMail}}</li>
             </ul>
-        </ul>
-    </div>
 
+        </ul>
+    </div> 
 </template>
 
 <script>
-
 export default {
-    //props: ["leNom", "lePhone", "leMail", "premium"],
-    props : {
-        leNom : {
+    props:{
+        id:{
             type:String,
-            required: true
+            required:true
         },
-        id : {
+        leNom:{
             type:String,
-            required: true
+            required:true
         },
-        lePhone : {
+        lePhone:{
             type:String,
-            required: true
+            required:true
         },
-        leMail : {
+        leMail:{
             type:String,
-            required: true
+            required:true
         },
-        premium : {
+        premium:{
             type:Boolean,
-            default: false,
-            //validator: function (value) {
-            //    return value === '1' || value === '0';
-            //}
-            required: false
+            required:false,
+            default:false
+
         }
-    },
-    emits : {
-        'mon-event-premium' : function(id) {
-                if (id) {
-                    return true ;
-                } else {
-                    console.warn('Fais Gaffe !');
-                    return false ;
-                }
-            },
     },
     data(){
         return{
-            
-            //premiumData: this.premium,
             detailsVisibles:false,
-/*
-            prop1:{
-                leNom: 'Steven Seagal',
-                lePhone: '1234567',
-                leMail: 'steven@seagal.com',
-            },
-            prop2:{
-                leNom: 'Gérard Mavuça',
-                lePhone: '0987654',
-                leMail: 'gérard@mavuça.com',
-            },
-
-            unPote:{
-                id:'jojo',
-                name:"Steven Seagal",
-                phone:'123 12346 24',
-                email:'steven@seegar.com',
-            },
-
-            unPote2: {
-                id:'jojo',
-                name:"Gérard Menvuça",
-                phone:'123 45678 99',
-                email:'gege@menvu.com',
-            },
-            */
+            // premiumData: this.premium
         }
     },
+    emits:['mon-event-premium','delete'],
+
     methods:{
         afficherDetails(){
             this.detailsVisibles = !this.detailsVisibles;
-        } ,
-        afficherPremium() {
-            this.$emit(`mon-event-premium`, this.id) ;
-            //this.premiumData = !this.premiumData ;
-            /*if (this.premiumData === '1') {
-                this.premiumData = '0' ;
-            } else {
-                this.premiumData = '1' ;
-            }*/
+        },
+        afficherPremium(){
+            // On test ce qu'il se passe si l'on passe pas d'id en paramètre
+            // this.$emit('mon-event-premium');
+            this.$emit('mon-event-premium',this.id);
+            // this.premiumData = !this.premiumData;
         }
     },
 }
